@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../common/values/colors.dart';
+import '../../home/screens/home_screen.dart';
 
 AppBar buildAppBar() {
   return AppBar(
@@ -28,7 +29,8 @@ AppBar buildAppBar() {
 //we need context for accessing bloc
 Widget buildThirdPartyLogin(BuildContext context) {
   return Container(
-    margin: const EdgeInsets.only(top: 40, bottom: 20),
+    margin: const EdgeInsets.only(top: 30, bottom: 20),
+    padding: EdgeInsets.only(left: 25, right: 25),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
@@ -135,18 +137,22 @@ Widget forgotPassword() {
   );
 }
 
-Widget buildLogInAndRegButton(String buttonName, String buttonType) {
+Widget buildLogInAndRegButton(
+    String buttonName, String buttonType, BuildContext context) {
   return GestureDetector(
-    onTap: () {},
+    onTap: () {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => const HomeScreen()));
+    },
     child: Container(
       width: 325,
-      height: 50,
+      height: 60,
       margin: EdgeInsets.only(
           left: 25, right: 25, top: buttonType == 'login' ? 40.h : 20.h),
       decoration: BoxDecoration(
           color: buttonType == "login"
-              ? AppColors.primaryBackground
-              : AppColors.primaryElement,
+              ? AppColors.primaryElement
+              : AppColors.primaryBackground,
           borderRadius: BorderRadius.circular(15),
           border: Border.all(
               //check for registration button border color
@@ -162,8 +168,8 @@ Widget buildLogInAndRegButton(String buttonName, String buttonType) {
               fontSize: 16,
               fontWeight: FontWeight.normal,
               color: buttonType == "login"
-                  ? AppColors.primaryText
-                  : AppColors.primaryBackground,
+                  ? AppColors.primaryBackground
+                  : AppColors.primaryText,
             )),
       ),
     ),

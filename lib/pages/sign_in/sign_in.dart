@@ -38,9 +38,12 @@ class _SignInState extends State<SignIn> {
             children: [
               buildThirdPartyLogin(context),
               Center(child: reusableText("Or use your email account to login")),
+              const SizedBox(
+                height: 15,
+              ),
               Container(
-                margin: EdgeInsets.only(top: 66.h),
-                padding: EdgeInsets.only(left: 25, right: 25),
+                margin: EdgeInsets.only(top: 36.h),
+                padding: const EdgeInsets.only(left: 25, right: 25),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -57,9 +60,18 @@ class _SignInState extends State<SignIn> {
                   ],
                 ),
               ),
+              const SizedBox(
+                height: 20,
+              ),
               forgotPassword(),
-              buildLogInAndRegButton("Log In", 'Login'),
-              buildLogInAndRegButton("Register", 'Register')
+              const SizedBox(
+                height: 40,
+              ),
+              buildLogInAndRegButton("Log In", 'login', context),
+              const SizedBox(
+                height: 20,
+              ),
+              buildLogInAndRegButton("Register", 'Register', context)
             ],
           ),
         ),
