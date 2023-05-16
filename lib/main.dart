@@ -1,4 +1,7 @@
 import 'package:firstmonie/app_blocs.dart';
+import 'package:firstmonie/http_helper.dart';
+import 'package:firstmonie/pages/home/cubit/posts_cubit.dart';
+import 'package:firstmonie/pages/sign_in/sign_in.dart';
 import 'package:firstmonie/pages/welcome/bloc/welcome.dart';
 import 'package:firstmonie/pages/welcome/bloc/welcome_blocs.dart';
 import 'package:flutter/material.dart';
@@ -18,19 +21,35 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
+    final _httpHelper = HTTPHelper();
+    return MultiRepositoryProvider(
       providers: [
-        BlocProvider(
-          create: (context) => WelcomeBloc(),
-        ),
-        BlocProvider(
-          create: (context) => AppBlocs(),
-        ),
+        RepositoryProvider.value(value: _httpHelper),
       ],
-      child: ScreenUtilInit(
-        builder: (context, child) => const MaterialApp(
-          debugShowCheckedModeBanner: false,
-          home: Welcome(),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => WelcomeBloc(),
+          ),
+          BlocProvider(
+            create: (context) => AppBlocs(),
+          ),
+          BlocProvider(
+            create: (context) => PostsCubit(httpHelper: _httpHelper),
+          ),
+        ],
+        child: ScreenUtilInit(
+          builder: (context, child) => MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+                appBarTheme: const AppBarTheme(
+                    elevation: 0, backgroundColor: Colors.white)),
+            home: const Welcome(),
+            routes: {
+              'myHomePage': (context) => const MyHomePage(),
+              'signIn': (context) => const SignIn(),
+            },
+          ),
         ),
       ),
     );
@@ -44,9 +63,9 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text('flutter demo homepg'),
+        elevation: 0,
+        backgroundColor: Colors.white,
+        shadowColor: Colors.white,
       ),
       body: Center(
         child: BlocBuilder<AppBlocs, AppStates>(builder: (context, state) {

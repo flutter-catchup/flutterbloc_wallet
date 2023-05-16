@@ -6,8 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../main.dart';
-
 class Welcome extends StatefulWidget {
   const Welcome({Key? key}) : super(key: key);
 
@@ -123,8 +121,9 @@ class _WelcomeState extends State<Welcome> {
                   curve: Curves.linearToEaseOut);
             } else {
               //Jump to new page
+              //Navigator.of(context).push(MaterialPageRoute(builder: (context) => MyHomePage()));
               Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => MyHomePage()));
+                  .pushNamedAndRemoveUntil('signIn', (route) => false);
             }
           },
           child: Container(

@@ -1,8 +1,32 @@
 import 'dart:convert';
+import 'dart:io';
 
+import 'package:firstmonie/pages/home/models/posts_response_model.dart';
 import 'package:http/http.dart' as http;
 
 class HTTPHelper {
+  final _client = http.Client();
+  Map<String, String> header() {
+    final headers = <String, String>{
+      HttpHeaders.contentTypeHeader: 'application/json; charset=UTF-8',
+    };
+    return headers;
+  }
+
+  Future<List<PostsResponseModel>> getPosts() async {
+    final response = await _client.get(
+      Uri.parse('https://jsonplaceholder.typicode.com/posts'),
+      headers: header(),
+    );
+    final json = jsonDecode(response.body) as List<dynamic>;
+    final posts = json.map(
+      (e) => PostsResponseModel.fromMap(
+        Map<String, dynamic>.from(e as Map<String, dynamic>),
+      ),
+    );
+    return posts.toList();
+  }
+
   //--fetching all items
   Future<List<Map>> fetchItems() async {
     List<Map> items = [];
