@@ -1,9 +1,10 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firstmonie/app_blocs.dart';
 import 'package:firstmonie/http_helper.dart';
-import 'package:firstmonie/pages/home/cubit/posts_cubit.dart';
+import 'package:firstmonie/pages/bloc_providers.dart';
+import 'package:firstmonie/pages/register/register.dart';
 import 'package:firstmonie/pages/sign_in/sign_in.dart';
 import 'package:firstmonie/pages/welcome/bloc/welcome.dart';
-import 'package:firstmonie/pages/welcome/bloc/welcome_blocs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,7 +12,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'app_events.dart';
 import 'app_states.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+      // options: DefaultFirebaseOptions.currentPlatform,
+      );
   runApp(const MyApp());
 }
 
@@ -27,17 +33,7 @@ class MyApp extends StatelessWidget {
         RepositoryProvider.value(value: _httpHelper),
       ],
       child: MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (context) => WelcomeBloc(),
-          ),
-          BlocProvider(
-            create: (context) => AppBlocs(),
-          ),
-          BlocProvider(
-            create: (context) => PostsCubit(httpHelper: _httpHelper),
-          ),
-        ],
+        providers: AppBlocProviders.allBlocProviders,
         child: ScreenUtilInit(
           builder: (context, child) => MaterialApp(
             debugShowCheckedModeBanner: false,
@@ -48,6 +44,7 @@ class MyApp extends StatelessWidget {
             routes: {
               'myHomePage': (context) => const MyHomePage(),
               'signIn': (context) => const SignIn(),
+              'register': (context) => const Register(),
             },
           ),
         ),
@@ -99,7 +96,7 @@ class MyHomePage extends StatelessWidget {
                 BlocProvider.of<AppBlocs>(context).add(Decrement()),
             tooltip: 'Decrement',
             child: const Icon(Icons.remove),
-          )
+          ),
         ],
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );

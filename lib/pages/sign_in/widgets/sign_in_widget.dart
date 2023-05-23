@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../common/values/colors.dart';
-import '../../home/screens/home_screen.dart';
 
 AppBar buildAppBar() {
   return AppBar(
@@ -30,7 +29,7 @@ AppBar buildAppBar() {
 Widget buildThirdPartyLogin(BuildContext context) {
   return Container(
     margin: const EdgeInsets.only(top: 30, bottom: 20),
-    padding: EdgeInsets.only(left: 25, right: 25),
+    padding: const EdgeInsets.only(left: 25, right: 25),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
@@ -66,7 +65,8 @@ Widget reusableText(String text) {
   );
 }
 
-Widget buildTextField(String hintText, String textType, String iconName) {
+Widget buildTextField(String hintText, String textType, String iconName,
+    void Function(String value)? func) {
   return Container(
       width: 325,
       height: 50,
@@ -88,6 +88,7 @@ Widget buildTextField(String hintText, String textType, String iconName) {
             width: 200,
             height: 50,
             child: TextField(
+              onChanged: (value) => func!(value),
               keyboardType: TextInputType.multiline,
               decoration: InputDecoration(
                   hintText: hintText,
@@ -138,15 +139,12 @@ Widget forgotPassword() {
 }
 
 Widget buildLogInAndRegButton(
-    String buttonName, String buttonType, BuildContext context) {
+    String buttonName, String buttonType, void Function()? func) {
   return GestureDetector(
-    onTap: () {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => const HomeScreen()));
-    },
+    onTap: func,
     child: Container(
       width: 325,
-      height: 60,
+      height: 50,
       margin: EdgeInsets.only(
           left: 25, right: 25, top: buttonType == 'login' ? 40.h : 20.h),
       decoration: BoxDecoration(

@@ -58,19 +58,20 @@ class _WelcomeState extends State<Welcome> {
                           "assets/images/Splash_3.png"),
                     ]),
                 Positioned(
-                    bottom: 50.h,
-                    child: DotsIndicator(
-                      position: state.page,
-                      dotsCount: 3,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      decorator: DotsDecorator(
-                          color: Colors.grey,
-                          activeColor: Colors.blue,
-                          size: const Size.square(8.0),
-                          activeSize: const Size(17.0, 8.0),
-                          activeShape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular((5.0)))),
-                    ))
+                  bottom: 10.h,
+                  child: DotsIndicator(
+                    position: state.page,
+                    dotsCount: 3,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    decorator: DotsDecorator(
+                        color: Colors.grey,
+                        activeColor: Colors.blue,
+                        size: const Size.square(8.0),
+                        activeSize: const Size(17.0, 8.0),
+                        activeShape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular((5.0)))),
+                  ),
+                ),
               ],
             ),
           );

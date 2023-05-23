@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "54141366462",
+    "project_id": "firstmonie-app",
+    "storage_bucket": "firstmonie-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:54141366462:android:e503a7b2687836414aeeef",
+        "android_client_info": {
+          "package_name": "com.korir.firstmonie"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "54141366462-dummv94dc0fcpndti5qv1nd98v442u7e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgKsENVZjj6QxMn1pgKZDIid13pn28y2w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "54141366462-dummv94dc0fcpndti5qv1nd98v442u7e.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "54141366462-vl4nsqardq4ujqsgl0eprmm1kjgo6dk7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ceva.firstmonieApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
