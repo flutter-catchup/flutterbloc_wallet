@@ -13,10 +13,10 @@ AppBar buildAppBar(String type) {
         height: 1.0,
       ),
     ),
-    title: const Center(
+    title: Center(
       child: Text(
-        "Log In",
-        style: TextStyle(
+        type,
+        style: const TextStyle(
             color: AppColors.primaryText,
             fontSize: 18,
             fontWeight: FontWeight.normal),

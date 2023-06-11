@@ -36,7 +36,7 @@ class _SignInState extends State<SignIn> {
         child: SafeArea(
             child: Scaffold(
           backgroundColor: Colors.white,
-          appBar: buildAppBar(),
+          appBar: buildAppBar("Log In"),
           body: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,7 +85,7 @@ class _SignInState extends State<SignIn> {
                 const SizedBox(
                   height: 10,
                 ),
-                buildLogInAndRegButton("Register", 'Register', () {
+                buildLogInAndRegButton("Sign Up", 'Register', () {
                   Navigator.of(context).pushNamed('register');
                 }),
               ],

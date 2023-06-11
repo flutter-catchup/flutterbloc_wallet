@@ -1,5 +1,7 @@
+import 'package:firstmonie/pages/register/bloc/register_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../sign_in/widgets/sign_in_widget.dart';
 
@@ -13,66 +15,71 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: SafeArea(
-          child: Scaffold(
-        backgroundColor: Colors.white,
-        appBar: buildAppBar(),
-        body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              buildThirdPartyLogin(context),
-              Center(child: reusableText("Or use your email account to login")),
-              const SizedBox(
-                height: 15,
-              ),
-              Container(
-                margin: EdgeInsets.only(top: 36.h),
-                padding: const EdgeInsets.only(left: 25, right: 25),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    reusableText("Email"),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    buildTextField("Enter your email address", "email", "user",
-                        (value) {
-                      context.read<SignInBloc>().add(EmailEvent(value));
-                    }),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    reusableText("Password"),
-                    buildTextField("Enter your password", "password", "lock",
-                        (value) {
-                      context.read<SignInBloc>().add(PasswordEvent(value));
-                    }),
-                  ],
+    return BlocBuilder<RegisterBloc, RegisterState>(builder: (context, state) {
+      return Container(
+        color: Colors.white,
+        child: SafeArea(
+            child: Scaffold(
+          backgroundColor: Colors.white,
+          appBar: buildAppBar("Sign Up"),
+          body: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(
+                  height: 30,
                 ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              forgotPassword(),
-              const SizedBox(
-                height: 30,
-              ),
-              buildLogInAndRegButton("Log In", 'login', () {
-                SignInController(context: context).handleSignIn('email');
-              }),
-              const SizedBox(
-                height: 10,
-              ),
-              buildLogInAndRegButton("Register", 'Register', () {
-                Navigator.of(context).pushNamed('register');
-              }),
-            ],
+                Center(
+                    child: reusableText(
+                        "Enter your details below and free sign up")),
+                const SizedBox(
+                  height: 15,
+                ),
+                Container(
+                  margin: EdgeInsets.only(top: 36.h),
+                  padding: const EdgeInsets.only(left: 25, right: 25),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      reusableText("User name"),
+                      buildTextField("Enter your user name", "name", "user",
+                          (value) {
+                        context.read<RegisterBloc>().add(EmailEvent(value));
+                      }),
+                      reusableText("Email"),
+                      buildTextField("Enter your Email", "email", "user",
+                          (value) {
+                        context.read<RegisterBloc>().add(EmailEvent(value));
+                      }),
+                      reusableText("Password"),
+                      buildTextField("Enter your password", "password", "lock",
+                          (value) {
+                        context.read<RegisterBloc>().add(PasswordEvent(value));
+                      }),
+                      reusableText("Re-enter your password"),
+                      buildTextField("Re-enter your password to confirm",
+                          "password", "lock", (value) {
+                        context.read<RegisterBloc>().add(EmailEvent(value));
+                      }),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  margin: const EdgeInsets.only(left: 25),
+                  child:
+                      reusableText("Enter your details below and free sign up"),
+                ),
+                buildLogInAndRegButton("Sign Up", 'login', () {
+                  Navigator.of(context).pushNamed('register');
+                }),
+              ],
+            ),
           ),
-        ),
-      )),
-    );
+        )),
+      );
+    });
   }
 }
