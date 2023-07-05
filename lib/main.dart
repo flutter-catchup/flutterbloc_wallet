@@ -3,7 +3,7 @@ import 'package:firstmonie/http_helper.dart';
 import 'package:firstmonie/pages/bloc_providers.dart';
 import 'package:firstmonie/pages/register/register.dart';
 import 'package:firstmonie/pages/sign_in/sign_in.dart';
-import 'package:firstmonie/pages/welcome/bloc/welcome.dart';
+import 'package:firstmonie/pages/welcome/welcome.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
