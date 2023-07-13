@@ -1,4 +1,5 @@
 import 'package:firstmonie/pages/register/bloc/register_bloc.dart';
+import 'package:firstmonie/pages/register/register_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -73,7 +74,8 @@ class _RegisterState extends State<Register> {
                       reusableText("Enter your details below and free sign up"),
                 ),
                 buildLogInAndRegButton("Sign Up", 'login', () {
-                  Navigator.of(context).pushNamed('register');
+                  //Navigator.of(context).pushNamed('register');
+                  RegisterController(context: context).handleEmailRegister();
                 }),
               ],
             ),
